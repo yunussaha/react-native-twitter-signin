@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/react-native-twitter-signin.svg)](https://badge.fury.io/js/react-native-twitter-signin)
 
-Note: this guide is for TwitterKit 3.0 and ReactNatiee 0.47+.
+Note: this guide is for TwitterKit 3.3 and ReactNative 0.56+.
 
 # React Native : Twitter Signin
 This package provides necessary code to get your social sign in using Twitter works with least pain possible.
@@ -20,7 +20,10 @@ Go to [Twitter Apps](https://apps.twitter.com/) to create your app so that you c
  - Remember to set a Callback Url, whatever will work
  - By default, Twitter won't allow you to grab user's email, so you have to apply for a permission for your app to retrieve user's email
 
-From Twitter Kit 3.0, Fabric is no longer required.
+Here is how callbacks would look like:
+![callbacks](https://github.com/GoldenOwlAsia/react-native-twitter-signin/blob/master/Example/img/callbacks.png?raw=true)
+
+From Twitter Kit 3.3, Fabric is no longer required.
 
 ## Setup
 
@@ -42,15 +45,7 @@ or
 ##### Manual
 
  - Link RNTwitterSignIn.xcodeproj by running `react-native link react-native-twitter-signin`
- - Download TwitterKit 3.0 from here https://ton.twimg.com/syndication/twitterkit/ios/3.0.3-update/TwitterKitManual.zip
- - Add TwitterKit, TwitterCore and 2 other bundle files into your root folder in Xcode
- - In `Build Phases → Link Binary with libraries` add `Twitter.framework` and `LibRBTwitterSignin.a`
-
----
-
-After done all the steps in `CocoaPods` or `Manual`, please do the following steps:
-
- - Configure `Info.plist` like below, replace `<consumerKey>` with your own key:
+ - Configure Info.Plist like below, replace `<consumerKey>` with your own key:
 
 ```
 // Info.plist
@@ -69,7 +64,7 @@ After done all the steps in `CocoaPods` or `Manual`, please do the following ste
     <string>twitterauth</string>
 </array>
 ```
-  - Modify AppDelegate.m to `#import <TwitterKit/TwitterKit.h>` and handle `openUrl`
+  - Modify AppDelegate.m to `#import <TwitterKit/TWTRKit.h>` and handle openUrl
 ````
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
   return [[Twitter sharedInstance] application:app openURL:url options:options];
@@ -97,7 +92,28 @@ you must combine the functions into single one:
 ```
 
 
-#### Android
+ - Add `TwitterKit`:
+
+ #### With CocoaPods
+
+ - Add TwitterKit to your `Podfile`
+ ```
+ // Podfile
+ target 'MyApp' do
+   # use_frameworks!
+   pod 'TwitterKit', '~> 3.3.0'
+ end
+ ```
+ - Run `pod install`
+
+ #### Manually
+
+ - Download TwitterKit 3.3 from here https://ton.twimg.com/syndication/twitterkit/ios/3.3.0/Twitter-Kit-iOS.zip
+ - Add TwitterKit, TwitterCore and 2 other bundle files into your root folder in Xcode
+ - In `Build Phases → Link Binary with libraries` add `Twitter.framework` and `LibRBTwitterSignin.a`
+
+
+### Android
 
 Run `react-native link react-native-twitter-signin`, or:
 
@@ -141,6 +157,7 @@ Keeps in mind that all the configure is for your build tools to recognise the fi
 
  - See the `Example` project.
 
+![Sample](https://github.com/GoldenOwlAsia/react-native-twitter-signin/blob/master/Example/img/android.png?raw=true)
 
 
 
