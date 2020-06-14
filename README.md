@@ -39,12 +39,12 @@ or
 
 ##### CocoaPods
 
- - Running `react-native link react-native-twitter-link`
+ - add `pod TwitterKit5` to your Podfile in ios folder
  - Go into `ios` folder and run `pod install`
 
 ##### Manual
 
- - Link RNTwitterSignIn.xcodeproj by running `react-native link react-native-twitter-signin`
+ - Add `RNTwitterSignIn.h` and `RNTwitterSignIn.m` from the ios directory of this package to your xcode project root
  - Configure Info.Plist like below, replace `<consumerKey>` with your own key:
 
 ```
@@ -64,7 +64,7 @@ or
     <string>twitterauth</string>
 </array>
 ```
-  - Modify AppDelegate.m to `#import <TwitterKit/TWTRKit.h>` and handle openUrl
+  - Modify AppDelegate.m to add `@import TwitterKit;` and handle openUrl
 ````
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
   return [[Twitter sharedInstance] application:app openURL:url options:options];
@@ -90,28 +90,6 @@ you must combine the functions into single one:
   return handleFB || handleTwitter;
 }
 ```
-
-
- - Add `TwitterKit`:
-
- #### With CocoaPods
-
- - Add TwitterKit to your `Podfile`
- ```
- // Podfile
- target 'MyApp' do
-   # use_frameworks!
-   pod 'TwitterKit', '~> 3.3.0'
- end
- ```
- - Run `pod install`
-
- #### Manually
-
- - Download TwitterKit 3.3 from here https://ton.twimg.com/syndication/twitterkit/ios/3.3.0/Twitter-Kit-iOS.zip
- - Add TwitterKit, TwitterCore and 2 other bundle files into your root folder in Xcode
- - In `Build Phases → Link Binary with libraries` add `Twitter.framework` and `LibRBTwitterSignin.a`
-
 
 ### Android
 
